@@ -1,0 +1,226 @@
+  <html>
+  <head>
+    <title>Homework 4</title>
+  <!--
+  <BODY>
+  This is for USC disclaimer
+  </BODY>
+  -->
+  <script>
+      html_text="";
+      function myNewException(error)
+      {
+        this.message = error;
+        this.name = myNewException;
+
+      }
+      function generateHTML(jsonDoc)
+      {  
+            ELEMENT_NODE = 1;    // MS parser doesn't define Node.ELEMENT_NODE
+            root=jsonDoc;
+            var json;
+            try
+            {
+              json = JSON.parse(root);
+            } 
+            catch(e) 
+            {
+              throw new myNewException('Unable to parse input, enter valid json data.');
+              
+            }
+
+            html_text ="<table border='1'>";
+
+            try {
+              var table = json.Mainline.Table;
+            }
+            catch (e) 
+            {
+              throw new myNewException('JSON data missing attribute Table.');
+            }
+
+            if (!table.hasOwnProperty("Header"))
+            {
+              throw new myNewException("Please enter header data");
+            }
+
+            var headerData = json.Mainline.Table.Header.Data;
+
+            if (headerData.length != 6)
+            {
+              throw new myNewException("Enter all the header data values in correct order to display aircraft details.");
+
+            }
+
+            if (!table.hasOwnProperty("Row"))
+            {
+              throw new myNewException("No airline company entries present");
+              
+            }
+            else 
+            {
+            	// Check if atleast 1 airline is present
+            	noOfAirline = Object.keys(table.Row);
+            	if (!(noOfAirline.length > 0))
+            	{
+            		throw new myNewException("No airline company entries present");
+            		
+            	}
+            }
+
+            var planes = json.Mainline.Table.Row;
+            
+            html_text += "<tr>";
+            for ( var k = 0; k < headerData.length; k++)
+            {
+
+              html_text += "<th>" + headerData[k] + "</th>";
+              
+            }
+
+            html_text += "</tr>";
+            for ( var i = 0; i < planes.length; i++)
+            {
+              html_text += "<tr>";
+              keyEachPlane = Object.keys(planes);
+
+              if (planes[i].hasOwnProperty("Hubs"))
+                hubs = planes[i].Hubs;
+              else
+              {
+                throw new myNewException("Missing attribute: \"Hubs\" for an airline.");
+              }
+             
+              if (hubs.hasOwnProperty("Hub"))
+                hubArray = planes[i].Hubs.Hub;
+             
+
+              var rowKeys = Object.keys(planes[i]);
+
+              for ( var j = 0; j < rowKeys.length; j++)
+              {
+
+                if (rowKeys[j] == "Airline" || rowKeys[j] == "IATA" || rowKeys[j] == "Notes" )
+                {
+                  html_text += "<td>" + planes[i][rowKeys[j] ]+ "</td>";
+                }
+                else if (rowKeys[j] == "Hubs")
+                {
+                  html_text += "<td>";
+                  html_text += "<ul>";
+                  
+                  if (hubs.hasOwnProperty("Hub"))
+                  {
+                    for (var l = 0; l < hubArray.length; l++)
+                    {
+                      if (l == 0)
+                      {
+                        html_text += "<li><b>" + hubArray[l] + "</b></li>";
+                      }
+                      else 
+                      {
+                        html_text += "<li>" + hubArray[l] + "</li>";
+                      }
+                    }
+                  }
+                  
+                  html_text += "</ul>";
+                  html_text += "</td>";
+                }
+                else if (rowKeys[j] == "HomePage")
+                {
+                  html_text += "<td><a href=\"" + planes[i][rowKeys[j]] + "\">" + planes[i][rowKeys[j]]+ "</a></td>";
+
+                }
+                else if (rowKeys[j] == "Plane")
+                {
+                  html_text += "<td><img src=\"" + planes[i][rowKeys[j]] + "\" width=200 height=150></td>";
+                }
+           
+              }
+              html_text += "</tr>";
+
+            }
+            html_text += "</table>";       
+      }
+
+      function loadJSON(url) {
+
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET",url,false);
+        xmlhttp.send();
+
+        if (xmlhttp.status/100 != 2)
+        {
+          alert("File does not exist, please check entered URL.");
+          return false;
+        }
+
+        jsonDoc=xmlhttp.responseText;
+        return jsonDoc;
+
+      }
+
+      function viewJSON(what)
+      {
+
+        var fileURL = what.URL.value;
+
+        if (fileURL.length == 0)
+        {
+          alert("Please enter a filename");
+          return false;
+
+        }
+      // Check if extension is json
+      /*var arraySplit = fileURL.split('.');
+      if (arraySplit[arraySplit.length - 1] != 'json')
+      {
+      alert("File extension is not json");
+      return false;
+      }*/
+
+      var jsonDoc = loadJSON(fileURL);
+      if (jsonDoc === false)
+      {
+      return false;
+      }
+
+      if (jsonDoc.length == 0)
+      {
+      alert("Empty file given as input.");
+      return false;
+      }
+
+      try 
+      {
+
+      jsonDoc.onload=generateHTML(jsonDoc);
+      }
+      catch (e)
+      {
+      alert(e.message);
+      return false;
+      }
+
+      hWin = window.open("", "Assignment4", "height=800,width=600");
+      hWin.document.write(html_text);  
+      hWin.document.close(); 
+      }
+
+    </script>
+  </head>
+  <body style="position: absolute; left: 40%; top: 25%; text-align: center;">
+    <div><b>Enter URL for Airline List JSON file</b></div>
+    <form name="myform" method="POST" id="location">
+
+      <input type="text" name="URL" maxlength="255" size="25" value="" style="margin: 5%; border-color: lightblue;" />
+
+      <br />
+
+      <input type="button" name="submit" value="Submit Query" onClick="viewJSON(this.form)" style="background-color: gainsboro" />
+
+    </form>
+    <noscript>
+  </body>
+  </html>

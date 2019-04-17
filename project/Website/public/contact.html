@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Death Rate Finder</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Antic'>
+    <style>
+            #myInput {
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+            }
+
+            #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            }
+
+            #facetdiv {
+                display: none;
+            }
+            
+            #displaytable{
+                display: none;
+            }
+
+            #myUL li a {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block;
+            }
+
+            #myUL li a:hover:not(.header) {
+            background-color: #eee;
+            }
+        </style>
+</head>
+<body>
+        <header>
+                <nav>
+                    <h1>Death Rate Finder</h1>
+                    <ul id="nav">
+                        <li><a class="homeblack" href="index.html">HOME</a></li>
+                        <li><a class="homered" href="contact.html">CONTACT US</a></li>
+                    </ul>
+                    <!-- <form align="right" action="home.html"><input type="submit" style="width:auto;background: yellow;color: black;border: none;height: 43px;font-size: 1.4em;cursor: pointer;outline: none;font-family: 'Raleway', sans-serif;font-weight: 900;" onclick="logout()" value="LOGOUT"></form> -->
+                </nav>
+            </header>
+            <div class="divider"></div>
+            <div class="searchlg">
+<div align="center" id="maindiv">
+    <br>
+    <h1>Send Us a Message</h1>
+    <br>
+    <form action="javascript:contactsubmit()" id="contactform">
+    <input class="button" type="email" id="email" placeholder="Enter Email..." required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" title="Please enter email in format username@characters.domain ..." >
+    <br>
+    <br>
+    <input class = "button" type="text" id="name" title="Please enter" placeholder="Enter Full Name..." required title="Please enter your name...">
+    <br>
+    <br>
+    <input class = "button" type="text" id="phno" placeholder="Enter phone number..." pattern="[1-9][0-9]{9}" title = "Please enter a 10 digit phone number..." required>
+    <br>
+    <br>
+    <textarea class = "button" style="height:150px;width:400px;" id="message" cols="500" rows="500" placeholder="Enter message here..." required title="Please write a message..."></textarea>
+    <br>
+    <br>
+    
+    <input type="submit" style="width:120px;
+    background: yellow;
+    color: black;
+    border: none;
+    height: 50px;
+    font-size: 1.4em;
+    padding: 0 1em;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;" id="contactbutton" value = "Submit"></form>
+
+</div>
+<div id="hidediv" align = "center" style = "display: none"><br><br><br><br><br><br><br><br><h1>Your Message sent Successfully!!!</h1></div>
+</div>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyBUg-uuLDXRM2njd0aK0dA2SAmz8j6o_So",
+		authDomain: "inf551-8d68c.firebaseapp.com",
+		databaseURL: "https://inf551-8d68c.firebaseio.com",
+		projectId: "inf551-8d68c",
+		storageBucket: "inf551-8d68c.appspot.com",
+		messagingSenderId: "511513021940"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+    <script src = "contactus.js"></script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Death Rate Finder</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Antic'>
+    <style>
+            #myInput {
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+            }
+
+            #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            }
+
+            #facetdiv {
+                display: none;
+            }
+            
+            #displaytable{
+                display: none;
+            }
+
+            #myUL li a {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block;
+            }
+
+            #myUL li a:hover:not(.header) {
+            background-color: #eee;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                }
+
+                /* Modal Content */
+                .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                }
+
+                /* The Close Button */
+                .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                }
+
+                .close:hover,
+                .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+                }
+        </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Death Rate Finder</h1>
+            <ul id="nav">
+                <li><a class="homered" href="search.html">SEARCH</a></li>
+            </ul>
+            
+            <form align="right" action="index.html"><input type="submit" style="width:auto;background: yellow;color: black;border: none;height: 43px;font-size: 1.4em;cursor: pointer;outline: none;font-family: 'Raleway', sans-serif;font-weight: 900;" onclick="logout()" value="LogOut"></form>
+        </nav>
+    </header>
+    <div class="divider"></div>
+    <div class="searchimage">
+              
+            <div>
+                    <br>
+                    <br>
+                    <div class="text">
+                    <button  id="myprof">My Searches</button></div>
+                        <div id="myModal1" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <span class="close" id="close">&times;</span>
+                          <p>Saved Searches...</p>
+                          <button id="viewsearch" onclick="savedsearches()">View Saved Searches</button>
+                          <br><br>
+                          <table id="savesearchtable" border="0">
+                            
+                          </table>
+                        </div>
+                      
+                        </div>  
+                    <br>
+                    <br>
+                    <div class="text">Search state of death...</div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                            <div style="height:5%;width:30%;float:left;" id="facetdiv">
+                                <div>
+                                    <table cellspacing ="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    <strong>
+                                                        <a class="text">Filters</a>
+                                                    </strong>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <ul style="list-style-type:none">
+                                                            <li>
+                                                                <label id="attryear"><strong><a style="font-family: 'Raleway', sans-serif;
+                                                                    margin: 0.5% 55% 0% 12%;
+                                                                    font-size: 20px;
+                                                                    color: rgb(255, 255, 255);">Year</a></strong></label>
+                                                                <li><br></li>
+                                                                <ul style="list-style: none;color:rgb(141, 228, 141);">
+                                                                    <li>
+                                                                        <input type="checkbox" id="idyear1" value="1999" name="yearname" onclick="clickfun()">
+                                                                        <label>1999</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear2" value="2000" name="yearname" onclick="clickfun()">
+                                                                            <label>2000</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear3" value="2001" name="yearname" onclick="clickfun()">
+                                                                            <label>2001</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear4" value="2002" name="yearname" onclick="clickfun()">
+                                                                            <label>2002</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear5" value="2003" name="yearname" onclick="clickfun()">
+                                                                            <label>2003</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear6" value="2004" name="yearname" onclick="clickfun()">
+                                                                            <label>2004</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear7" value="2005" name="yearname" onclick="clickfun()">
+                                                                            <label>2005</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear8" value="2006" name="yearname" onclick="clickfun()">
+                                                                            <label>2006</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear9" value="2007" name="yearname" onclick="clickfun()">
+                                                                            <label>2007</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear10" value="2008" name="yearname" onclick="clickfun()">
+                                                                            <label>2008</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear11" value="2009" name="yearname" onclick="clickfun()">
+                                                                            <label>2009</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear12" value="2010" name="yearname" onclick="clickfun()">
+                                                                            <label>2010</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear13" value="2011" name="yearname" onclick="clickfun()">
+                                                                            <label>2011</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear14" value="2012" name="yearname" onclick="clickfun()">
+                                                                            <label>2012</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear15" value="2013" name="yearname" onclick="clickfun()">
+                                                                            <label>2013</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear16" value="2014" name="yearname" onclick="clickfun()">
+                                                                            <label>2014</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idyear17" value="2015" name="yearname" onclick="clickfun()">
+                                                                            <label>2015</label>
+                                                                    </li>
+                                                                </ul>
+                                                                
+                                                            </li>
+                                                            <br>
+                                                            <li>
+                                                                <label id="allcause"><strong><a style="font-family: 'Raleway', sans-serif;
+                                                                    margin: 0.5% 55% 0% 6%;
+                                                                    font-size: 20px;
+                                                                    color: rgb(255, 255, 255);">Cause of Death</a></strong></label>
+                                                                <li><br></li>
+                                                                <ul style="list-style: none;color:rgb(141, 228, 141);">
+                                                                    <li>
+                                                                        <input type="checkbox" id="idcause1" value="All Causes" name="causename" onclick="causeclick()">
+                                                                        <label>All Causes</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause2" value="Alzheimer's disease" name="causename" onclick="causeclick()">
+                                                                            <label>Alzheimer's disease</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause3" value="Cancer" name="causename" onclick="causeclick()">
+                                                                            <label>Cancer</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause4" value="Chronic liver disease and cirrhosis" name="causename" onclick="causeclick()">
+                                                                            <label>Chronic liver disease and cirrhosis</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause5" value="CLRD" name="causename" onclick="causeclick()">
+                                                                            <label>CLRD</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause6" value="Diabetes" name="causename" onclick="causeclick()">
+                                                                            <label>Diabetes</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause7" value="Diseases of Heart" name="causename" onclick="causeclick()">
+                                                                            <label>Diseases of Heart</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause8" value="Essential hypertension and hypertensive renal disease" name="causename" onclick="causeclick()">
+                                                                            <label>Essential hypertension and hypertensive renal disease</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause9" value="Homicide" name="causename" onclick="causeclick()">
+                                                                            <label>Homicide</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause10" value="Influenza and pneumonia" name="causename" onclick="causeclick()">
+                                                                            <label>Influenza and pneumonia</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause11" value="Kidney Disease" name="causename" onclick="causeclick()">
+                                                                            <label>Kidney Disease</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause12" value="Unintentional Injuries" name="causename" onclick="causeclick()">
+                                                                            <label>Unintentional Injuries</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause13" value="Parkinson's disease" name="causename" onclick="causeclick()">
+                                                                            <label>Parkinson's disease</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause14" value="Pneumonitis due to solids and liquids" name="causename" onclick="causeclick()">
+                                                                            <label>Pneumonitis due to solids and liquids</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause15" value="Septicemia" name="causename" onclick="causeclick()">
+                                                                            <label>Septicemia</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause16" value="Stroke" name="causename" onclick="causeclick()">
+                                                                            <label>Stroke</label>
+                                                                    </li>
+                                                                    <li>
+                                                                            <input type="checkbox" id="idcause17" value="Suicide" name="causename" onclick="causeclick()">
+                                                                            <label>Suicide</label>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <br>
+                                                            <li>
+                                                                <label id="deathrange"><strong><a style="font-family: 'Raleway', sans-serif;
+                                                                    margin: 0.5% 55% 0% 0%;
+                                                                    font-size: 20px;
+                                                                    color: rgb(255, 255, 255);">Number of Deaths</a></strong></label>
+                                                            </li>
+                                                            <li><br></li>
+                                                            <ul style="list-style: none;color:rgb(141, 228, 141);">
+                                                                <li>
+                                                                    <input type="text" id="minlimit" placeholder="0" style="width: 50px;">
+                                                                    <label for="minlimit">Min</label>
+                                                                    <br>   
+                                                                </li>
+                                                                <br>
+                                                                <li>
+                                                                    <input type="text" id="maxlimit" placeholder="2712630" style="width: 60px;">
+                                                                    <label for="maxlimit">Max</label>
+                                                                    <br>
+                                                                </li>
+                                                                <br>
+                                                                <li>
+                                                                    <button id="gobutton" style="background-color: #4CAF50;
+                                                                    border: none;
+                                                                    color: white;
+                                                                    text-align: center;
+                                                                    text-decoration: none;
+                                                                    display: inline-block;
+                                                                    font-size: 16px;
+                                                                    cursor: pointer;" onclick="submitFun()">GO</button>
+                                                                </li>
+                                                            </ul>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+        
+                                    </table>
+                                </div>
+                            </div>
+                    <div style="float: right; width:68%;color:rgb(236, 219, 219);">
+                    <div style="width:55%">
+                        <input class="button" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for state names..">
+                        <ul id="myUL">
+                        <li onclick="submitlist('Alabama')"><a id="statelist">Alabama</a></li>
+                        <li onclick="submitlist('Alaska')"><a id="statelist">Alaska</a></li>
+                        <li onclick="submitlist('Arkansas')"><a id="statelist">Arkansas</a></li>
+                        <li onclick="submitlist('California')"><a id="statelist">California</a></li>
+                        <li onclick="submitlist('Connecticut')"><a id="statelist">Connecticut</a></li>
+                        <li onclick="submitlist('Delaware')"><a id="statelist">Delaware</a></li>
+                        <li onclick="submitlist('District of Columbia')"><a id="statelist">District of Columbia</a></li>
+                        <li onclick="submitlist('Florida')"><a id="statelist">Florida</a></li>
+                        <li onclick="submitlist('Georgia')"><a id="statelist">Georgia</a></li>
+                        <li onclick="submitlist('Hawaii')"><a id="statelist">Hawaii</a></li>
+                        <li onclick="submitlist('Idaho')"><a id="statelist">Idaho</a></li>
+                        <li onclick="submitlist('Illinois')"><a id="statelist">Illinois</a></li>
+                        <li onclick="submitlist('Indiana')"><a id="statelist">Indiana</a></li>
+                        <li onclick="submitlist('Iowa')"><a id="statelist">Iowa</a></li>
+                        <li onclick="submitlist('Kansas')"><a id="statelist">Kansas</a></li>
+                        <li onclick="submitlist('Kentucky')"><a id="statelist">Kentucky</a></li>
+                        <li onclick="submitlist('Louisiana')"><a id="statelist">Louisiana</a></li>
+                        <li onclick="submitlist('Maine')"><a id="statelist">Maine</a></li>
+                        <li onclick="submitlist('Maryland')"><a id="statelist">Maryland</a></li>
+                        <li onclick="submitlist('Massachusetts')"><a id="statelist">Massachusetts</a></li>
+                        <li onclick="submitlist('Michigan')"><a id="statelist">Michigan</a></li>
+                        <li onclick="submitlist('Minnesota')"><a id="statelist">Minnesota</a></li>
+                        <li onclick="submitlist('Mississippi')"><a id="statelist">Mississippi</a></li>
+                        <li onclick="submitlist('Missouri')"><a id="statelist">Missouri</a></li>
+                        <li onclick="submitlist('Montana')"><a id="statelist">Montana</a></li>
+                        <li onclick="submitlist('Nebraska')"><a id="statelist">Nebraska</a></li>
+                        <li onclick="submitlist('New Hampshire')"><a id="statelist">New Hampshire</a></li>
+                        <li onclick="submitlist('New Jersey')"><a id="statelist">New Jersey</a></li>
+                        <li onclick="submitlist('New Mexico')"><a id="statelist">New Mexico</a></li>
+                        <li onclick="submitlist('New York')"><a id="statelist">New York</a></li>
+                        <li onclick="submitlist('North Carolina')"><a id="statelist">North Carolina</a></li>
+                        <li onclick="submitlist('North Dakota')"><a id="statelist">North Dakota</a></li>
+                        <li onclick="submitlist('Ohio')"><a id="statelist">Ohio</a></li>
+                        <li onclick="submitlist('Oklahoma')"><a id="statelist">Oklahoma</a></li>
+                        <li onclick="submitlist('Oregon')"><a id="statelist">Oregon</a></li>
+                        <li onclick="submitlist('Pennsylvania')"><a id="statelist">Pennsylvania</a></li>
+                        <li onclick="submitlist('Rhode Island')"><a id="statelist">Rhode Island</a></li>
+                        <li onclick="submitlist('South Carolina')"><a id="statelist">South Carolina</a></li>
+                        <li onclick="submitlist('Tennessee')"><a id="statelist">Tennessee</a></li>
+                        <li onclick="submitlist('South Dakota')"><a id="statelist">South Dakota</a></li>
+                        <li onclick="submitlist('Texas')"><a id="statelist">Texas</a></li>
+                        <li onclick="submitlist('United States')"><a id="statelist">United States</a></li>
+                        <li onclick="submitlist('Utah')"><a id="statelist">Utah</a></li>
+                        <li onclick="submitlist('Vermont')"><a id="statelist">Vermont</a></li>
+                        <li onclick="submitlist('Virginia')"><a id="statelist">Virginia</a></li>
+                        <li onclick="submitlist('Washington')"><a id="statelist">Washington</a></li>
+                        <li onclick="submitlist('West Virginia')"><a id="statelist">West Virginia</a></li>
+                        <li onclick="submitlist('Wisconsin')"><a id="statelist">Wisconsin</a></li>
+                        <li onclick="submitlist('Wyoming')"><a id="Wyoming">Utah</a></li>
+                        </ul>
+                    </div>
+                    <button id = "savesearch" style="width:auto;background: green;margin:0% 30% 0% 0%;color: black;border: none;height: 20px;font-size: 0.9em;cursor: pointer;outline: none;font-family: 'Raleway', sans-serif;font-weight: 900; display:none;">Save Search</button>
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <span class="close" id = "close1">&times;</span>
+                          <p>Please enter name for your search...</p>
+                          <input id = "searchname" type="text" placeholder = "enter name for search" required>
+                          <br>
+                          <input type="button" value="SAVE" onclick="savesearch()">
+                        </div>
+                      
+                    </div>    
+                    <br>
+                        <table id="displaytable" border="0">
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBUg-uuLDXRM2njd0aK0dA2SAmz8j6o_So",
+        authDomain: "inf551-8d68c.firebaseapp.com",
+        databaseURL: "https://inf551-8d68c.firebaseio.com",
+        projectId: "inf551-8d68c",
+        storageBucket: "inf551-8d68c.appspot.com",
+        messagingSenderId: "511513021940"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="index.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
