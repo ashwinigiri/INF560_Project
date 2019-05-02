@@ -1,0 +1,238 @@
+        .img1 {
+                vertical-align: middle;
+                margin-left:15%;
+                height: 600px;
+                width:70%;
+            }
+        
+        /* Position the image container (needed to position the left and right arrows) */
+        .container1 {
+            position: relative;
+            margin-left:100px;
+            margin-right:100px;
+        }
+        
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        .mySlides1 {
+            display: none;
+        }
+
+        .mySlides3 {
+            display: none;
+        }
+        .mySlides4 {
+            display: none;
+        }
+        .mySlides5 {
+            display: none;
+        }
+        .mySlides6 {
+            display: none;
+        }
+        .mySlides7 {
+            display: none;
+        }
+        .mySlides8 {
+            display: none;
+        }
+        .mySlides9 {
+            display: none;
+        }
+        .mySlides10 {
+            display: none;
+        }
+        
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+        
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+        
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+        
+        .row1:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Six columns side by side */
+        .column1 {
+            float: left;
+            width: 16.66%;
+        }
+        
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+        .demo1{
+            opacity: 0.6;
+        }
+
+        .demo3{
+            opacity: 0.6;
+        }
+        .demo4{
+            opacity: 0.6;
+        }
+        .demo5{
+            opacity: 0.6;
+        }
+        .demo6{
+            opacity: 0.6;
+        }
+        .demo7{
+            opacity: 0.6;
+        }
+        .demo8{
+            opacity: 0.6;
+        }
+        .demo9{
+            opacity: 0.6;
+        }
+        .demo10{
+            opacity: 0.6;
+        }
+        
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo1:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo3:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo4:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo5:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo6:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo7:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo8:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo9:hover {
+            opacity: 1;
+        }
+
+        .active,
+        .demo10:hover {
+            opacity: 1;
+        }
+
+        /* collapsible */
+        
+        .collapsible1 {
+            position: relative;
+            margin-left:100px;
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 85%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+        
+        .active1, .collapsible1:hover {
+            background-color: #555;
+        }
+        
+        .collapsible1:after {
+            content: '\002B';
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        
+        .active1:after {
+            content: "\2212";
+        }
+        
+        .content2 {
+            position: relative;
+            margin-left:100px;
+            margin-right:100px;
+            width:85%;
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+        
